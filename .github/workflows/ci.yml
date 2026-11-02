@@ -15,8 +15,3 @@ jobs:
       - run: uv sync
       - run: uv run ruff check src/ bin/
       - run: uv run ruff format --check src/ bin/
-
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "TODO: implement test job"
