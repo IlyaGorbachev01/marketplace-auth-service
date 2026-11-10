@@ -6,6 +6,7 @@ from src.presentation.api.dependencies import get_settings, get_uow
 from src.presentation.api.routes.internal import router as internal_router
 from src.presentation.api.routes.public import router as public_router
 from src.settings import Settings
+from src.tracing import TraceIdMiddleware
 from tests.conftest import FakeUnitOfWork
 
 JWT_SECRET = "test-secret-key-that-is-long-enough"
@@ -27,6 +28,7 @@ _test_settings = Settings(
 @pytest.fixture
 def app(fake_uow: FakeUnitOfWork) -> FastAPI:
     app = FastAPI()
+    app.add_middleware(TraceIdMiddleware)
     app.include_router(public_router)
     app.include_router(internal_router)
 
